@@ -2,6 +2,7 @@ package com.hackerkernel.cashking.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -40,18 +40,19 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Fragment to show new offers
  */
-public class OfferFragment extends Fragment {
-    private static final String TAG = OfferFragment.class.getSimpleName();
+public class NewOfferFragment extends Fragment {
+    private static final String TAG = NewOfferFragment.class.getSimpleName();
     private String mobile;
     private RequestQueue mRequestQue;
-    @Bind(R.id.recycleView)
-    RecyclerView recyclerView;
-    @Bind(R.id.frameLayout) View frame;
+
+    @Bind(R.id.recycleView) RecyclerView recyclerView;
+    @Bind(R.id.frameLayout) View layoutForSnackbar;
+
     private List<DealsListPojo> list = new ArrayList<>();
 
-    public OfferFragment() {
+    public NewOfferFragment() {
         // Required empty public constructor
     }
 
@@ -62,49 +63,60 @@ public class OfferFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_offer, container, false);
         ButterKnife.bind(this,view);
+
         mobile = MySharedPreferences.getInstance(getActivity()).getUserMobile();
         mRequestQue = MyVolley.getInstance().getRequestQueue();
+
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
-        checkIfNetworkAvailable();
+
+
         return view;
     }
 
-    private void checkIfNetworkAvailable() {
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        checkInternetFetchOffer();
+    }
+
+    private void checkInternetFetchOffer() {
         if (Util.isNetworkAvailable()) {
-            getDataInBackground();
+            fetchOfferInBackground();
+        }else {
+            Util.noInternetSnackBar(getActivity(),layoutForSnackbar);
         }
     }
 
-    private void getDataInBackground() {
+    private void fetchOfferInBackground() {
         StringRequest request = new StringRequest(Request.Method.POST, EndPoints.OFFERLIST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject obj = new JSONObject(response);
-                    boolean retuurned = obj.getBoolean(Constants.COM_RETURN);
-                    String messag = obj.getString(Constants.COM_MESSAGE);
-                    if (retuurned) {
-                       JSONArray data = obj.getJSONArray(Constants.COM_DATA);
-                       list = JsonParsor.parseDealsList(data);
-                        DealsAdapter adapter = new DealsAdapter(getActivity());
-                        adapter.setDealList(list);
-                        recyclerView.setAdapter(adapter);
-                    }
-                    else {
-                      Toast.makeText(getActivity(),messag,Toast.LENGTH_LONG).show();
+                    boolean returned = obj.getBoolean(Constants.COM_RETURN);
+                    String message = obj.getString(Constants.COM_MESSAGE);
+                    if (returned) {
+                        JSONArray data = obj.getJSONArray(Constants.COM_DATA);
+                        parseOfferResponse(data);
+                    } else {
+                        Util.showRedSnackbar(layoutForSnackbar,message);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.e(TAG,"Mur"+e);
+                    Log.e(TAG,"MUR: fetchOfferInBackground"+e);
+                    Util.showParsingErrorAlert(getActivity());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Log.e(TAG,"MUR: fetchOfferInBackground: "+error.getMessage());
                 String errror = MyVolley.handleVolleyError(error);
-                Util.showRedSnackbar(frame,errror);
-
+                if (error != null){
+                    Util.showRedSnackbar(layoutForSnackbar,errror);
+                }
             }
         }) {
             @Override
@@ -112,11 +124,18 @@ public class OfferFragment extends Fragment {
                 Map<String, String> params = new HashMap<>();
                 params.put(Constants.COM_APIKEY,Util.generateApiKey(mobile));
                 params.put(Constants.COM_MOBILE,mobile);
-                params.put("type","new");
+                params.put(Constants.COM_TYPE,"new");
                 return params;
             }
         };
         mRequestQue.add(request);
+    }
+
+    private void parseOfferResponse(JSONArray data) throws JSONException {
+        list = JsonParsor.parseDealsList(data);
+        DealsAdapter adapter = new DealsAdapter(getActivity());
+        adapter.setDealList(list);
+        recyclerView.setAdapter(adapter);
     }
 
 }

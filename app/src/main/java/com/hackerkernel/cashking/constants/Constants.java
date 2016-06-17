@@ -11,6 +11,7 @@ public class Constants {
             COM_RETURN = "return",
             COM_MESSAGE = "message",
             COM_DATA = "data",
+            COM_TYPE = "type",
             COM_COUNT = "count",
             COM_ID = "id",
             COM_DESCRIPTION = "description",
