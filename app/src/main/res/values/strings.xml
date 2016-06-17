@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CashKing</string>
+    <string name="login">Login</string>
+    <string name="enter_mobile_no">Enter Mobile No.</string>
+    <string name="loginBtn">Login</string>
+    <string name="oops">OOPS!!</string>
+    <string name="dont_worry_engineers_r_working">Woops!! Something went wrong But don\'t worry our engineers are working on it.</string>
+    <string name="report_issue">Report issue</string>
+    <string name="try_again">Try again</string>
+    <string name="retry">Retry</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="ok">Ok</string>
+    <string name="cash_king">Cash King</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
