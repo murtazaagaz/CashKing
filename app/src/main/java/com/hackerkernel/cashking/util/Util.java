@@ -30,10 +30,6 @@ import java.util.Map;
  */
 public class Util {
     private static final String TAG = Util.class.getSimpleName();
-    private static final int SECOND_MILLIS = 1000;
-    private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
-    private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
-    private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
 
     public static boolean isNetworkAvailable(){
         ConnectivityManager connectivityManager = (ConnectivityManager) MyApplication.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -73,12 +69,11 @@ public class Util {
     /*
     * Method to send user to NO Internet Activity
     * */
-
-
     public static void goToHomeActivity(Activity activity) {
         Intent intent = new Intent(activity, HomeActivity.class);
-        intent.addFlags(IntentCompat.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         activity.startActivity(intent);
+        activity.finish();
     }
 
     /*
