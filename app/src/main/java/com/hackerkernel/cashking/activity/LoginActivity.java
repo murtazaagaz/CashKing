@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,29 +31,27 @@ import butterknife.ButterKnife;
 
 public class LoginActivity extends BaseActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
-    @Bind(R.id.mobile_EditText)
-    EditText mobileEditText;
+    @Bind(R.id.mobile_EditText) EditText mobileEditText;
     @Bind(R.id.password_EditText) EditText passwordEditText;
-    @Bind(R.id.relative)
-    RelativeLayout relative;
+    @Bind(R.id.relative) View relative;
 
-    @Bind(R.id.login_Btn)
-    Button loginBtn;
+    @Bind(R.id.login_Btn) Button loginBtn;
     private RequestQueue mRequestQue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         mRequestQue = MyVolley.getInstance().getRequestQueue();
-    loginBtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            String mobile = mobileEditText.getText().toString();
-            String password = passwordEditText.getText().toString();
-            checkIfNetworkAvaillble(mobile, password);
-        }
-    });
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mobile = mobileEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                checkIfNetworkAvaillble(mobile, password);
+            }
+        });
     }
 
     private void checkIfNetworkAvaillble(String mobile, String password) {
@@ -72,15 +69,16 @@ public class LoginActivity extends BaseActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-            String errorString = MyVolley.handleVolleyError(error);
+                String errorString = MyVolley.handleVolleyError(error);
                 Util.showRedSnackbar(relative,errorString);
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("Key",mobile);
-                params.put("Key",password);
+                params.put(Constants.COM_APIKEY,Util.generateApiKey(mobile));
+                params.put(Constants.COM_MOBILE,mobile);
+                params.put(Constants.COM_PASSWORD,password);
                 return params;
             }
         };

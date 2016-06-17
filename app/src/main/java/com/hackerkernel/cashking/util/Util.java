@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -44,7 +45,7 @@ public class Util {
     public static void showRedSnackbar(View layoutForSnacbar,String message){
         Snackbar snack = Snackbar.make(layoutForSnacbar,message,Snackbar.LENGTH_LONG);
         ViewGroup group = (ViewGroup) snack.getView();
-        group.setBackgroundColor(ContextCompat.getColor(MyApplication.getAppContext(), R.color.colorPrimaryDark));
+        group.setBackgroundColor(ContextCompat.getColor(MyApplication.getAppContext(), R.color.danger));
         snack.show();
     }
 
@@ -76,20 +77,9 @@ public class Util {
 
     public static void goToHomeActivity(Activity activity) {
         Intent intent = new Intent(activity, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(IntentCompat.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
     }
-
-    public static void dialNumber(Activity activity, String phonenumber){
-        Uri callUri = Uri.parse("tel://"+phonenumber);
-        Intent callIntent = new Intent(Intent.ACTION_CALL,callUri);
-        try{
-            activity.startActivity(callIntent);
-        }catch (SecurityException e){
-            Toast.makeText(activity,e.getMessage(),Toast.LENGTH_LONG).show();
-        }
-    }
-
 
     /*
     * Method to generate api key
@@ -115,7 +105,7 @@ public class Util {
                snackbar.dismiss();
             }
         });
-        snackbar.setActionTextColor(ContextCompat.getColor(activity,R.color.colorPrimaryDark));
+        snackbar.setActionTextColor(ContextCompat.getColor(activity,R.color.accent));
         snackbar.show();
     }
 

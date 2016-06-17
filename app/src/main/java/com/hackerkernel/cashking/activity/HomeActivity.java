@@ -33,23 +33,20 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity {
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.home_tabs)
-    TabLayout tabLayout;
-    @Bind(R.id.home_viewPager)
-    ViewPager viewPager;
-
-
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.home_tabs) TabLayout tabLayout;
+    @Bind(R.id.home_viewPager) ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;
         getSupportActionBar().setTitle(R.string.cash_king);
+
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -59,8 +56,6 @@ public class HomeActivity extends AppCompatActivity {
         adapter.addFragment(new OfferFragment(),"Offer");
         adapter.addFragment(new CompletedOfferFragment(),"Completed");
         viewPager.setAdapter(adapter);
-
-
     }
 
 

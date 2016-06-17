@@ -16,7 +16,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        FontsOverRide.setDefaultFont(this,"SERIF","OpenSans-Regular.ttf");
+        FontsOverRide.setDefaultFont(this,"SERIF","Exo-Regular.ttf");
     }
 
     public static MyApplication getInstance() {

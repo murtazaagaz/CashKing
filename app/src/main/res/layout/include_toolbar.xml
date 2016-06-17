@@ -2,7 +2,7 @@
 <android.support.v7.widget.Toolbar android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimary"
+    android:background="@color/primary"
     app:layout_collapseMode="pin"
     android:id="@+id/toolbar"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"

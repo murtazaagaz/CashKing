@@ -11,12 +11,12 @@ import javax.crypto.spec.SecretKeySpec;
  * Created by husain on 5/24/2016.
  */
 public class ApiEncrypter {
-    private String iv = "fedcba9876543210";//Dummy iv (CHANGE IT!)
+    private String iv = "0123456789abcded";//Dummy iv (CHANGE IT!)
     private IvParameterSpec ivspec;
     private SecretKeySpec keyspec;
     private Cipher cipher;
 
-    private String SecretKey = "0123456789abcdef";//Dummy secretKey (CHANGE IT!)
+    private String SecretKey = "abcded9876543210";//Dummy secretKey (CHANGE IT!)
 
     public ApiEncrypter()
     {
