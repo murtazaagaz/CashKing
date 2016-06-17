@@ -4,7 +4,20 @@ package com.hackerkernel.cashking.pojo;
  * Created by QUT on 6/16/2016.
  */
 public class DealsListPojo {
-    private String imageUrl, dealName, dealDescription, DealOffer;
+    private String imageUrl;
+    private String dealName;
+    private String dealDescription;
+    private String DealOffer;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
 
     public String getImageUrl() {
         return imageUrl;
