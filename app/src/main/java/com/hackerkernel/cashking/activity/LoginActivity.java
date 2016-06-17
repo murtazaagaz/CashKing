@@ -1,5 +1,6 @@
 package com.hackerkernel.cashking.activity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,44 +34,66 @@ public class LoginActivity extends BaseActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
     @Bind(R.id.mobile_EditText) EditText mobileEditText;
     @Bind(R.id.password_EditText) EditText passwordEditText;
-    @Bind(R.id.relative) View relative;
+    @Bind(R.id.relative) View layoutForSnackbar;
 
     @Bind(R.id.login_Btn) Button loginBtn;
     private RequestQueue mRequestQue;
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        //init volley
         mRequestQue = MyVolley.getInstance().getRequestQueue();
+
+        //init progressdialog
+        pd = new ProgressDialog(this);
+        pd.setMessage(getString(R.string.processing));
+        pd.setCancelable(false);
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mobile = mobileEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                checkIfNetworkAvaillble(mobile, password);
+                String mobile = mobileEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
+                checkInternetAndDoLogin(mobile, password);
             }
         });
     }
 
-    private void checkIfNetworkAvaillble(String mobile, String password) {
+    private void checkInternetAndDoLogin(String mobile, String password) {
         if (Util.isNetworkAvailable()){
-            getDataInBackground(mobile,password);
+
+            if (mobile.isEmpty() || password.isEmpty()){
+                Util.showRedSnackbar(layoutForSnackbar,getString(R.string.fill_in_all_the_fields));
+                return;
+            }
+
+            doLoginInBackground(mobile,password);
+        }else {
+            Util.noInternetSnackBar(this,layoutForSnackbar);
         }
     }
 
-    private void getDataInBackground(final String mobile, final String password) {
+    private void doLoginInBackground(final String mobile, final String password) {
+        pd.show();
         StringRequest req = new StringRequest(Request.Method.POST, EndPoints.REGISTER, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                pd.dismiss();
                 parseDataInBackground(response, mobile);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                pd.dismiss();
+                error.printStackTrace();
+                Log.e(TAG,"MUR: doLoginInBackground: "+error.getMessage());
                 String errorString = MyVolley.handleVolleyError(error);
-                Util.showRedSnackbar(relative,errorString);
+                Util.showRedSnackbar(layoutForSnackbar,errorString);
             }
         }){
             @Override
@@ -94,14 +117,14 @@ public class LoginActivity extends BaseActivity {
             if (returned){
                 MySharedPreferences.getInstance(this).setUserMobile(mobile);
                 Util.goToHomeActivity(this);
+            }else {
+                Util.showRedSnackbar(layoutForSnackbar,message);
             }
         } catch (JSONException e) {
             e.printStackTrace();
             Log.e(TAG,"MUR:"+e);
             Util.showParsingErrorAlert(this);
         }
-
-
     }
 
 }

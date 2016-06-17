@@ -13,4 +13,6 @@
     <string name="cash_king">Cash King</string>
     <string name="welcome_to_cashking">Welcome To CashKing</string>
     <string name="enter_password">Enter password</string>
+    <string name="processing">Processing..</string>
+    <string name="fill_in_all_the_fields">Fill in all the fields</string>
 </resources>
