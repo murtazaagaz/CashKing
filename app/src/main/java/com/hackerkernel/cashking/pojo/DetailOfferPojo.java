@@ -4,10 +4,45 @@ package com.hackerkernel.cashking.pojo;
  * Created by murtaza on 6/18/2016.
  */
 public class DetailOfferPojo {
-    private String offerName, offerDescription, offerAmount,
-            offerNote, offerShortDesrip, offerDetailDescrip
-            ,offerUseAmount, offerShortDescrip2, useIconImg,
-            downloadIconImg;
+    private String offerImage;
+
+    public String getOfferImage() {
+        return offerImage;
+    }
+
+    public void setOfferImage(String offerImage) {
+        this.offerImage = offerImage;
+    }
+
+    private String offerName;
+    private String offerDescription;
+    private String offerAmount;
+    private String offerNote;
+    private String offerShortDesrip;
+    private String offerDetailDescrip, offerDetailInstruction;
+
+    public String getOfferDetailInstruction() {
+        return offerDetailInstruction;
+    }
+
+    public void setOfferDetailInstruction(String offerDetailInstruction) {
+        this.offerDetailInstruction = offerDetailInstruction;
+    }
+
+    private String offerUseAmount;
+    private String offerShortDescrip2;
+    private String useIconImg;
+    private String downloadIconImg;
+
+    public String getVeryShortDescrip() {
+        return veryShortDescrip;
+    }
+
+    public void setVeryShortDescrip(String veryShortDescrip) {
+        this.veryShortDescrip = veryShortDescrip;
+    }
+
+    private String veryShortDescrip;
 
     public String getOfferUseAmount() {
         return offerUseAmount;

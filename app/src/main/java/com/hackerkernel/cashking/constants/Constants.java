@@ -17,9 +17,12 @@ public class Constants {
             COM_DESCRIPTION = "description",
             COM_DEALNAME = "deal",
             COM_AMOUNT = "amount",
-    COM_NAME = "name",
-    COM_SHORT_DESCRIPTION = "short_description",
-
-    COM_TIME = "time";
+            COM_NOTE = "note",
+            COM_NAME = "name",
+            COM_VERY_SHORT_DESCRIPTION = "short_description",
+            COM_SHORT_DESCRIPTION = "short_description",
+            COM_TIME = "time",
+            COM_DETAIL_DESCRIPTION ="detail_description",
+            COM_DETAIL_INSTRUCTION = "detail_instruction";
 }
 

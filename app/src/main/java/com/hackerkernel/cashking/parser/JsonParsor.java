@@ -3,6 +3,7 @@ package com.hackerkernel.cashking.parser;
 import android.util.Log;
 
 import com.hackerkernel.cashking.constants.Constants;
+import com.hackerkernel.cashking.constants.EndPoints;
 import com.hackerkernel.cashking.pojo.DealsListPojo;
 import com.hackerkernel.cashking.pojo.DetailOfferPojo;
 import com.hackerkernel.cashking.pojo.SimplePojo;
@@ -14,9 +15,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by QUT on 6/16/2016.
- */
+
 public class JsonParsor {
     public  static SimplePojo simpleParser(String response) throws JSONException {
         JSONObject obj = new JSONObject(response);
@@ -47,6 +46,14 @@ public class JsonParsor {
         DetailOfferPojo pojo = new DetailOfferPojo();
         for (int i = 0; i <data.length() ; i++) {
             JSONObject obj = data.getJSONObject(i);
+            pojo.setOfferName(obj.getString(Constants.COM_NAME));
+            pojo.setOfferAmount(obj.getString(Constants.COM_AMOUNT));
+            pojo.setOfferNote(obj.getString(Constants.COM_NOTE));
+            pojo.setVeryShortDescrip(obj.getString(Constants.COM_VERY_SHORT_DESCRIPTION));
+            pojo.setOfferImage(EndPoints.IMAGE_BASE_URL+obj.getString(Constants.COM_IMG));
+            pojo.setOfferDetailDescrip(obj.getString(Constants.COM_DETAIL_DESCRIPTION));
+            pojo.setOfferDetailInstruction(obj.getString(Constants.COM_DETAIL_INSTRUCTION));
+
 
 
         }
