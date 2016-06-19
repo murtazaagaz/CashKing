@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#eee"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context="com.hackerkernel.cashking.activity.DetailOfferActivity">
+
+    <include layout="@layout/include_toolbar" android:id="@+id/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/button">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:clickable="false"
+            android:focusable="false"
+            card_view:cardCornerRadius="3dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="20dp">
+
+                <ImageView
+                    android:id="@+id/offer_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" />
+
+                <TextView
+                    android:id="@+id/offer_name"
+                    style="@style/Base.TextAppearance.AppCompat.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/offer_image"
+                    android:text="Flipkart" />
+
+                <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/offer_name"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/offer_image"
+                    android:text="Try this app"
+                    android:textColor="#000000" />
+
+                <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="Get: 3rs"
+                    android:textColor="#DD2C00" />
+
+                <TextView
+                    android:id="@+id/offer_description"
+                    style="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/offer_image"
+                    android:layout_marginTop="25dp"
+                    android:text="Flowing water, clear sky Experience the enchanting beauty of Lake city Bhopal."
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/offer_note"
+                    style="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/offer_description"
+                    android:layout_marginTop="20dp"
+                    android:text="Flowing water, clear sky Experience the enchanting beauty of Lake city Bhopal."
+                    android:textColor="#DD2C00" />
+
+                <ImageView
+                    android:id="@+id/download_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/offer_note"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_download_black" />
+
+                <TextView
+                    android:id="@+id/offer_short_description"
+                    style="@style/Base.TextAppearance.AppCompat.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/offer_note"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/download_icon"
+                    android:text="Instal and Use" />
+
+                <TextView
+                    android:id="@+id/instal_amount"
+                    style="@style/Base.TextAppearance.AppCompat.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/offer_note"
+                    android:layout_marginTop="20dp"
+                    android:text="Rs 12" />
+
+                <ImageView
+                    android:id="@+id/use_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/download_icon"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_download_black" />
+
+                <TextView
+                    android:id="@+id/offer_short_description2"
+                    style="@style/Base.TextAppearance.AppCompat.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/download_icon"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/download_icon"
+                    android:text="Use for 1 minute" />
+
+                <TextView
+                    android:id="@+id/use_amount"
+                    style="@style/Base.TextAppearance.AppCompat.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/download_icon"
+                    android:layout_marginTop="20dp"
+                    android:text="Rs 12" />
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/use_amount"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/offer_detail_dercip"
+                    style="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view1"
+                    android:layout_marginTop="15dp"
+                    android:text="Flowing water, clear sky Experienc the enchanting beauty of Lake city Bhopal."
+                    android:textColor="#000000" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/accent_button"
+        android:text="This this app"
+        android:textColor="#fff"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/button" />
+
+</RelativeLayout>

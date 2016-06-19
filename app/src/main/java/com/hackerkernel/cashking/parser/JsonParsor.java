@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.hackerkernel.cashking.constants.Constants;
 import com.hackerkernel.cashking.pojo.DealsListPojo;
+import com.hackerkernel.cashking.pojo.DetailOfferPojo;
 import com.hackerkernel.cashking.pojo.SimplePojo;
 
 import org.json.JSONArray;
@@ -41,5 +42,14 @@ public class JsonParsor {
         Log.d("TAG","MUR"+dealList.get(0));
         return dealList;
 
+    }
+    public static DetailOfferPojo parseDetailOffer(JSONArray data) throws JSONException {
+        DetailOfferPojo pojo = new DetailOfferPojo();
+        for (int i = 0; i <data.length() ; i++) {
+            JSONObject obj = data.getJSONObject(i);
+
+
+        }
+        return pojo;
     }
 }

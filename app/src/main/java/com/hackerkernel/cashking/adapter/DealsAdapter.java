@@ -1,16 +1,21 @@
 package com.hackerkernel.cashking.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hackerkernel.cashking.R;
+import com.hackerkernel.cashking.activity.DetailOfferActivity;
+import com.hackerkernel.cashking.constants.Constants;
 import com.hackerkernel.cashking.pojo.DealsListPojo;
+import com.hackerkernel.cashking.pojo.DetailOfferPojo;
 
 import java.util.List;
 
@@ -48,7 +53,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.MyViewHolder
         return mList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView dealName, dealDesription, dealOffer;
         ImageView dealImage;
         public MyViewHolder(View itemView) {
@@ -57,6 +62,21 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.MyViewHolder
             dealDesription = (TextView) itemView.findViewById(R.id.deal_desrciption);
             dealOffer = (TextView) itemView.findViewById(R.id.deal_offer);
             dealImage = (ImageView) itemView.findViewById(R.id.deal_image);
+
+
+            //set on click on offer
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            //set offer id
+            int pos = getAdapterPosition();
+            String id = mList.get(pos).getId();
+
+            Intent i = new Intent(mContext, DetailOfferActivity.class);
+            i.putExtra(Constants.COM_ID,id);
+            mContext.startActivity(i);
         }
     }
 }
