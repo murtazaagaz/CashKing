@@ -1,7 +1,7 @@
 package com.hackerkernel.cashking.activity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -42,9 +42,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class DetailOfferActivity extends AppCompatActivity {
+    private static final String TAG = DetailOfferActivity.class.getSimpleName();
     private RequestQueue mRequestQue;
     private String mOfferId;
     private MySharedPreferences sp;
+    private ProgressDialog pd;
 
     @Bind(R.id.toolbar) Toolbar mToolbar;
     @Bind(R.id.layout_for_snackbar) View mLayoutForSnackbar;
@@ -68,6 +70,12 @@ public class DetailOfferActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Offer detail");
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //init pd
+        pd = new ProgressDialog(this);
+        pd.setMessage(getString(R.string.processing));
+        pd.setCancelable(false);
+
 
         //init sp
         sp = MySharedPreferences.getInstance(this);
@@ -97,9 +105,11 @@ public class DetailOfferActivity extends AppCompatActivity {
     }
 
     private void fetchDataInBackground() {
+        pd.show();
         StringRequest req = new StringRequest(Request.Method.POST, EndPoints.OFFER_DETAIL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                pd.dismiss();
                 try {
                     SimplePojo pojo = JsonParsor.simpleParser(response);
                     if (pojo.isReturned()){
@@ -109,11 +119,11 @@ public class DetailOfferActivity extends AppCompatActivity {
                         DetailOfferPojo detailOfferPojo = JsonParsor.parseDetailOffer(data);
                         setupViews(detailOfferPojo);
                     }else{
-                        //TODO:: handle when response is false
-                        Toast.makeText(getApplicationContext(),pojo.getMessage(),Toast.LENGTH_LONG).show();
+                        Util.showRedSnackbar(mLayoutForSnackbar,pojo.getMessage());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e(TAG,"HUS: fetchDataInBackground: "+e.getMessage());
                     Util.showParsingErrorAlert(DetailOfferActivity.this);
                 }
 
@@ -121,6 +131,7 @@ public class DetailOfferActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                pd.dismiss();
                 String handleError = MyVolley.handleVolleyError(error);
                 if (handleError != null){
                     Util.showRedSnackbar(mLayoutForSnackbar,handleError);
@@ -141,7 +152,7 @@ public class DetailOfferActivity extends AppCompatActivity {
 
     private void setupViews(DetailOfferPojo d) {
         mName.setText(d.getName());
-        mAmount.setText(d.getAmount());
+        mAmount.setText("GET "+getString(R.string.rupee_sign)+d.getAmount());
         mShortDescription.setText(d.getShortDescription());
         mDetailDescription.setText(d.getDetailDescription());
         mDetailInstruction.setText(d.getDetailInstruction().replace("<br>","\n"));
@@ -170,7 +181,7 @@ public class DetailOfferActivity extends AppCompatActivity {
             TextView descTextview = (TextView) view.findViewById(R.id.description);
             TextView amountTextview = (TextView) view.findViewById(R.id.amount);
             descTextview.setText(c.getDescription());
-            amountTextview.setText(c.getAmount());
+            amountTextview.setText(getString(R.string.rupee_sign)+c.getAmount());
             mInstallmentContainer.addView(view);
         }
 
