@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 
+import com.hackerkernel.cashking.activity.FetchWallet;
 import com.hackerkernel.cashking.activity.LoginActivity;
 import com.hackerkernel.cashking.storage.MySharedPreferences;
 
@@ -17,6 +18,8 @@ public abstract class BaseAuthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //download new useer wallet amount
+        FetchWallet w = new FetchWallet(this);
 
         //if user not login send him to Main activity
         if (!MySharedPreferences.getInstance(this).getLoginStatus()){

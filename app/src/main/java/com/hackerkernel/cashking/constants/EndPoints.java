@@ -7,6 +7,7 @@ public class EndPoints {
     public static final String REGISTER = BASE_URL + "login.php",
             OFFERLIST = BASE_URL + "getOfferList.php",
             IMAGE_BASE_URL = SERVER_URL,
+            WALLET_AMOUNT = BASE_URL + "getWalletAmount.php",
             OFFER_DETAIL = BASE_URL + "getOfferDetail.php";
 
 

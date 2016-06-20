@@ -29,6 +29,7 @@ public class MySharedPreferences {
             KEY_USER_CREATED_AT = "created_at",
             KEY_USER_CITY = "location",
             KEY_USER_LATITUDE = "latitude",
+            KEY_USER_WALLET = "wallet",
             KEY_USER_LONGITUDE ="longitude";
 
 
@@ -152,6 +153,13 @@ public class MySharedPreferences {
     public String getUserLongitude(){
         return mSharedPreference.getString(KEY_USER_LONGITUDE,KEY_DEFAULT);
 
+
+    }
+    public void setWalletAmount(String amount){
+        mSharedPreference.edit().putString(KEY_USER_WALLET,amount).apply();
+    }
+    public String getWalletAmount(){
+        return mSharedPreference.getString(KEY_USER_WALLET,KEY_DEFAULT);
     }
 
 

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/layoutForSnackbar">
+
+    <include layout="@layout/include_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Heloliosdhufesdkj euhsdxzb xzj"/>
+
+            <!-- phone number & amount inputs -->
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:stretchColumns="1">
+
+                <TableRow>
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_download_black" />
+
+                    <EditText
+                        android:id="@+id/mobileNumber"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        />
+                </TableRow>
+
+                <TableRow>
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_download_black" />
+
+                    <EditText
+                        android:id="@+id/amount"
+                        android:inputType="numberDecimal"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp" />
+                </TableRow>
+
+            </TableLayout>
+            <!--  / phone number & amount inputs -->
+
+            <!-- prepaid postpade radio button -->
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal"
+                android:id="@+id/radio_button_group">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/mobile_radio_button"
+                    android:checked="true"
+                    />
+
+
+            </RadioGroup>
+            <!-- / prepaid postpade radio button -->
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/operator_spinner" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recharge_now"
+                android:background="@drawable/accent_button"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

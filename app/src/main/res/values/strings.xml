@@ -17,4 +17,5 @@
     <string name="fill_in_all_the_fields">Fill in all the fields</string>
     <string name="try_this_app">Try this app</string>
     <string name="wallet">wallet</string>
+    <string name="detail_instruction">Detail instruction</string>
 </resources>

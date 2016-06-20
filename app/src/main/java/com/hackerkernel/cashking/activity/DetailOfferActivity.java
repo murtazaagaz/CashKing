@@ -1,11 +1,10 @@
 package com.hackerkernel.cashking.activity;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -25,7 +24,6 @@ import com.hackerkernel.cashking.constants.EndPoints;
 import com.hackerkernel.cashking.network.MyVolley;
 import com.hackerkernel.cashking.parser.JsonParsor;
 import com.hackerkernel.cashking.pojo.DetailOfferPojo;
-import com.hackerkernel.cashking.pojo.OfferInstallementPojo;
 import com.hackerkernel.cashking.pojo.SimplePojo;
 import com.hackerkernel.cashking.storage.MySharedPreferences;
 import com.hackerkernel.cashking.util.Util;
@@ -35,18 +33,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class DetailOfferActivity extends AppCompatActivity {
-    private static final String TAG = DetailOfferActivity.class.getSimpleName();
     private RequestQueue mRequestQue;
     private String mOfferId;
     private MySharedPreferences sp;
-    private ProgressDialog pd;
 
     @Bind(R.id.toolbar) Toolbar mToolbar;
     @Bind(R.id.layout_for_snackbar) View mLayoutForSnackbar;
@@ -70,12 +65,6 @@ public class DetailOfferActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Offer detail");
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //init pd
-        pd = new ProgressDialog(this);
-        pd.setMessage(getString(R.string.processing));
-        pd.setCancelable(false);
-
 
         //init sp
         sp = MySharedPreferences.getInstance(this);
@@ -105,33 +94,27 @@ public class DetailOfferActivity extends AppCompatActivity {
     }
 
     private void fetchDataInBackground() {
-        pd.show();
         StringRequest req = new StringRequest(Request.Method.POST, EndPoints.OFFER_DETAIL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                pd.dismiss();
                 try {
                     SimplePojo pojo = JsonParsor.simpleParser(response);
                     if (pojo.isReturned()){
                         JSONObject obj = new JSONObject(response);
                         JSONArray data = obj.getJSONArray(Constants.COM_DATA);
-                        //parse offer detail
                         DetailOfferPojo detailOfferPojo = JsonParsor.parseDetailOffer(data);
                         setupViews(detailOfferPojo);
                     }else{
-                        Util.showRedSnackbar(mLayoutForSnackbar,pojo.getMessage());
+                        //TODO:: handle when response is false
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.e(TAG,"HUS: fetchDataInBackground: "+e.getMessage());
-                    Util.showParsingErrorAlert(DetailOfferActivity.this);
                 }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                pd.dismiss();
                 String handleError = MyVolley.handleVolleyError(error);
                 if (handleError != null){
                     Util.showRedSnackbar(mLayoutForSnackbar,handleError);
@@ -152,12 +135,11 @@ public class DetailOfferActivity extends AppCompatActivity {
 
     private void setupViews(DetailOfferPojo d) {
         mName.setText(d.getName());
-        mAmount.setText("GET "+getString(R.string.rupee_sign)+d.getAmount());
+        mAmount.setText(d.getAmount());
         mShortDescription.setText(d.getShortDescription());
         mDetailDescription.setText(d.getDetailDescription());
         mDetailInstruction.setText(d.getDetailInstruction().replace("<br>","\n"));
 
-        Log.d("HUS","HUS: "+d.getName());
         //set offer name to title bar
         if (getSupportActionBar() != null){
             getSupportActionBar().setTitle(d.getName());
@@ -166,25 +148,12 @@ public class DetailOfferActivity extends AppCompatActivity {
         //setup Image
         if (d.getImageUrl() != null){
             String imageUrl = EndPoints.IMAGE_BASE_URL + d.getImageUrl();
+            Log.d("HUS","HUS: "+imageUrl);
             Glide.with(this)
                     .load(imageUrl)
                     .thumbnail(0.5f)
                     .into(mImage);
         }
-
-        //parse Offer installement amount
-        List<OfferInstallementPojo> list = d.getInstallmentList();
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        for (int i = 0; i < list.size(); i++) {
-            OfferInstallementPojo c = list.get(i);
-            View view = inflater.inflate(R.layout.include_offer_installment_table_layout,mInstallmentContainer,false);
-            TextView descTextview = (TextView) view.findViewById(R.id.description);
-            TextView amountTextview = (TextView) view.findViewById(R.id.amount);
-            descTextview.setText(c.getDescription());
-            amountTextview.setText(getString(R.string.rupee_sign)+c.getAmount());
-            mInstallmentContainer.addView(view);
-        }
-
     }
 
 
