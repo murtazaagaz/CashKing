@@ -4,123 +4,94 @@ package com.hackerkernel.cashking.pojo;
  * Created by murtaza on 6/18/2016.
  */
 public class DetailOfferPojo {
-    private String offerImage;
+    private String imageUrl,
+            name,
+            amount,
+            detailDescription,
+            shortDescription,
+            detailInstruction,
+            note,
+            link,
+            affOfferId,
+            affId;
 
-    public String getOfferImage() {
-        return offerImage;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setOfferImage(String offerImage) {
-        this.offerImage = offerImage;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    private String offerName;
-    private String offerDescription;
-    private String offerAmount;
-    private String offerNote;
-    private String offerShortDesrip;
-    private String offerDetailDescrip, offerDetailInstruction;
-
-    public String getOfferDetailInstruction() {
-        return offerDetailInstruction;
+    public String getName() {
+        return name;
     }
 
-    public void setOfferDetailInstruction(String offerDetailInstruction) {
-        this.offerDetailInstruction = offerDetailInstruction;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    private String offerUseAmount;
-    private String offerShortDescrip2;
-    private String useIconImg;
-    private String downloadIconImg;
-
-    public String getVeryShortDescrip() {
-        return veryShortDescrip;
+    public String getAmount() {
+        return amount;
     }
 
-    public void setVeryShortDescrip(String veryShortDescrip) {
-        this.veryShortDescrip = veryShortDescrip;
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 
-    private String veryShortDescrip;
-
-    public String getOfferUseAmount() {
-        return offerUseAmount;
+    public String getDetailDescription() {
+        return detailDescription;
     }
 
-    public void setOfferUseAmount(String offerUseAmount) {
-        this.offerUseAmount = offerUseAmount;
+    public void setDetailDescription(String detailDescription) {
+        this.detailDescription = detailDescription;
     }
 
-    public String getOfferShortDescrip2() {
-        return offerShortDescrip2;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
-    public void setOfferShortDescrip2(String offerShortDescrip2) {
-        this.offerShortDescrip2 = offerShortDescrip2;
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 
-    public String getUseIconImg() {
-        return useIconImg;
+    public String getDetailInstruction() {
+        return detailInstruction;
     }
 
-    public void setUseIconImg(String useIconImg) {
-        this.useIconImg = useIconImg;
+    public void setDetailInstruction(String detailInstruction) {
+        this.detailInstruction = detailInstruction;
     }
 
-    public String getDownloadIconImg() {
-        return downloadIconImg;
+    public String getNote() {
+        return note;
     }
 
-    public void setDownloadIconImg(String downloadIconImg) {
-        this.downloadIconImg = downloadIconImg;
+    public void setNote(String note) {
+        this.note = note;
     }
 
-    public String getOfferName() {
-        return offerName;
+    public String getLink() {
+        return link;
     }
 
-    public void setOfferName(String offerName) {
-        this.offerName = offerName;
+    public void setLink(String link) {
+        this.link = link;
     }
 
-    public String getOfferDescription() {
-        return offerDescription;
+    public String getAffOfferId() {
+        return affOfferId;
     }
 
-    public void setOfferDescription(String offerDescription) {
-        this.offerDescription = offerDescription;
+    public void setAffOfferId(String affOfferId) {
+        this.affOfferId = affOfferId;
     }
 
-    public String getOfferAmount() {
-        return offerAmount;
+    public String getAffId() {
+        return affId;
     }
 
-    public void setOfferAmount(String offerAmount) {
-        this.offerAmount = offerAmount;
-    }
-
-    public String getOfferNote() {
-        return offerNote;
-    }
-
-    public void setOfferNote(String offerNote) {
-        this.offerNote = offerNote;
-    }
-
-    public String getOfferShortDesrip() {
-        return offerShortDesrip;
-    }
-
-    public void setOfferShortDesrip(String offerShortDesrip) {
-        this.offerShortDesrip = offerShortDesrip;
-    }
-
-    public String getOfferDetailDescrip() {
-        return offerDetailDescrip;
-    }
-
-    public void setOfferDetailDescrip(String offerDetailDescrip) {
-        this.offerDetailDescrip = offerDetailDescrip;
+    public void setAffId(String affId) {
+        this.affId = affId;
     }
 }

@@ -46,16 +46,13 @@ public class JsonParsor {
         DetailOfferPojo pojo = new DetailOfferPojo();
         for (int i = 0; i <data.length() ; i++) {
             JSONObject obj = data.getJSONObject(i);
-            pojo.setOfferName(obj.getString(Constants.COM_NAME));
-            pojo.setOfferAmount(obj.getString(Constants.COM_AMOUNT));
-            pojo.setOfferNote(obj.getString(Constants.COM_NOTE));
-            pojo.setVeryShortDescrip(obj.getString(Constants.COM_VERY_SHORT_DESCRIPTION));
-            pojo.setOfferImage(EndPoints.IMAGE_BASE_URL+obj.getString(Constants.COM_IMG));
-            pojo.setOfferDetailDescrip(obj.getString(Constants.COM_DETAIL_DESCRIPTION));
-            pojo.setOfferDetailInstruction(obj.getString(Constants.COM_DETAIL_INSTRUCTION));
-
-
-
+            pojo.setImageUrl(obj.getString(Constants.COM_IMG));
+            pojo.setName(obj.getString(Constants.COM_NAME));
+            pojo.setAmount(obj.getString(Constants.COM_AMOUNT));
+            pojo.setDetailDescription(obj.getString(Constants.COM_DETAIL_DESCRIPTION));
+            pojo.setShortDescription(obj.getString(Constants.COM_SHORT_DESCRIPTION));
+            pojo.setDetailInstruction(obj.getString(Constants.COM_DETAIL_INSTRUCTION));
+            pojo.setNote(obj.getString(Constants.COM_NOTE));
         }
         return pojo;
     }

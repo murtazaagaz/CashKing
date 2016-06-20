@@ -19,7 +19,6 @@ public class Constants {
             COM_AMOUNT = "amount",
             COM_NOTE = "note",
             COM_NAME = "name",
-            COM_VERY_SHORT_DESCRIPTION = "short_description",
             COM_SHORT_DESCRIPTION = "short_description",
             COM_TIME = "time",
             COM_DETAIL_DESCRIPTION ="detail_description",

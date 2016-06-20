@@ -7,6 +7,7 @@
     android:background="#eee"
     android:orientation="vertical"
     android:weightSum="1"
+    android:id="@+id/layout_for_snackbar"
     tools:context="com.hackerkernel.cashking.activity.DetailOfferActivity">
 
     <include layout="@layout/include_toolbar" android:id="@+id/toolbar" />
@@ -37,8 +38,10 @@
 
                 <ImageView
                     android:id="@+id/offer_image"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp" />
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"/>
 
                 <TextView
                     android:id="@+id/offer_name"
@@ -46,120 +49,62 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/offer_image"
-                    android:text="Flipkart" />
+                    android:layout_toEndOf="@+id/offer_image" />
 
                 <TextView
-                    style="@style/Base.TextAppearance.AppCompat.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/offer_short_description"
                     android:layout_below="@+id/offer_name"
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/offer_image"
-                    android:text="Try this app"
-                    android:textColor="#000000" />
+                    android:layout_toEndOf="@+id/offer_image"
+                    android:textColor="@color/secondary_text" />
 
                 <TextView
                     style="@style/Base.TextAppearance.AppCompat.Headline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="Get: 3rs"
-                    android:textColor="#DD2C00" />
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/offer_amount"
+                    android:textColor="@color/danger" />
 
                 <TextView
-                    android:id="@+id/offer_description"
-                    style="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:id="@+id/offer_detail_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_below="@+id/offer_image"
-                    android:layout_marginTop="25dp"
-                    android:text="Flowing water, clear sky Experience the enchanting beauty of Lake city Bhopal."
-                    android:textColor="#000000" />
+                    android:textColor="@color/primary_text" />
 
                 <TextView
                     android:id="@+id/offer_note"
-                    style="@style/Base.TextAppearance.AppCompat.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/offer_description"
-                    android:layout_marginTop="20dp"
-                    android:text="Flowing water, clear sky Experience the enchanting beauty of Lake city Bhopal."
-                    android:textColor="#DD2C00" />
+                    android:layout_below="@+id/offer_detail_description"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/danger" />
 
-                <ImageView
-                    android:id="@+id/download_icon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_below="@+id/offer_note"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/ic_download_black" />
-
-                <TextView
-                    android:id="@+id/offer_short_description"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/offer_note"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@+id/download_icon"
-                    android:text="Instal and Use" />
-
-                <TextView
-                    android:id="@+id/instal_amount"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/offer_note"
-                    android:layout_marginTop="20dp"
-                    android:text="Rs 12" />
-
-                <ImageView
-                    android:id="@+id/use_icon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_below="@+id/download_icon"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/ic_download_black" />
-
-                <TextView
-                    android:id="@+id/offer_short_description2"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/download_icon"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@+id/download_icon"
-                    android:text="Use for 1 minute" />
-
-                <TextView
-                    android:id="@+id/use_amount"
-                    style="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/download_icon"
-                    android:layout_marginTop="20dp"
-                    android:text="Rs 12" />
-
-                <View
-                    android:id="@+id/view1"
+                <!-- Installment container -->
+                <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/use_amount"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_height="wrap_content"
+                    android:id="@+id/offer_installment_container"
+                    android:layout_below="@id/offer_note"
+                    android:stretchColumns="1"
+                    android:gravity="center">
+
+
+                </TableLayout>
+                <!-- / Installment container -->
 
                 <TextView
-                    android:id="@+id/offer_detail_dercip"
-                    style="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:id="@+id/offer_detail_instruction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/view1"
-                    android:layout_marginTop="15dp"
-                    android:text="Flowing water, clear sky Experienc the enchanting beauty of Lake city Bhopal."
-                    android:textColor="#000000" />
+                    android:layout_below="@+id/offer_installment_container"
+                    android:layout_marginTop="10dp" />
 
             </RelativeLayout>
 
@@ -170,7 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/accent_button"
-        android:text="This this app"
+        android:text="@string/try_this_app"
         android:textColor="#fff"
         android:layout_alignParentBottom="true"
         android:id="@+id/button" />
