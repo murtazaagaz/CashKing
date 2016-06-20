@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -24,6 +25,7 @@ import com.hackerkernel.cashking.constants.EndPoints;
 import com.hackerkernel.cashking.network.MyVolley;
 import com.hackerkernel.cashking.parser.JsonParsor;
 import com.hackerkernel.cashking.pojo.DetailOfferPojo;
+import com.hackerkernel.cashking.pojo.OfferInstallementPojo;
 import com.hackerkernel.cashking.pojo.SimplePojo;
 import com.hackerkernel.cashking.storage.MySharedPreferences;
 import com.hackerkernel.cashking.util.Util;
@@ -33,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -102,13 +105,16 @@ public class DetailOfferActivity extends AppCompatActivity {
                     if (pojo.isReturned()){
                         JSONObject obj = new JSONObject(response);
                         JSONArray data = obj.getJSONArray(Constants.COM_DATA);
+                        //parse offer detail
                         DetailOfferPojo detailOfferPojo = JsonParsor.parseDetailOffer(data);
                         setupViews(detailOfferPojo);
                     }else{
                         //TODO:: handle when response is false
+                        Toast.makeText(getApplicationContext(),pojo.getMessage(),Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Util.showParsingErrorAlert(DetailOfferActivity.this);
                 }
 
             }
@@ -140,6 +146,7 @@ public class DetailOfferActivity extends AppCompatActivity {
         mDetailDescription.setText(d.getDetailDescription());
         mDetailInstruction.setText(d.getDetailInstruction().replace("<br>","\n"));
 
+        Log.d("HUS","HUS: "+d.getName());
         //set offer name to title bar
         if (getSupportActionBar() != null){
             getSupportActionBar().setTitle(d.getName());
@@ -148,12 +155,25 @@ public class DetailOfferActivity extends AppCompatActivity {
         //setup Image
         if (d.getImageUrl() != null){
             String imageUrl = EndPoints.IMAGE_BASE_URL + d.getImageUrl();
-            Log.d("HUS","HUS: "+imageUrl);
             Glide.with(this)
                     .load(imageUrl)
                     .thumbnail(0.5f)
                     .into(mImage);
         }
+
+        //parse Offer installement amount
+        List<OfferInstallementPojo> list = d.getInstallmentList();
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        for (int i = 0; i < list.size(); i++) {
+            OfferInstallementPojo c = list.get(i);
+            View view = inflater.inflate(R.layout.include_offer_installment_table_layout,mInstallmentContainer,false);
+            TextView descTextview = (TextView) view.findViewById(R.id.description);
+            TextView amountTextview = (TextView) view.findViewById(R.id.amount);
+            descTextview.setText(c.getDescription());
+            amountTextview.setText(c.getAmount());
+            mInstallmentContainer.addView(view);
+        }
+
     }
 
 

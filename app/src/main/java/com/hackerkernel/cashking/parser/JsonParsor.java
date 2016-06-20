@@ -6,6 +6,7 @@ import com.hackerkernel.cashking.constants.Constants;
 import com.hackerkernel.cashking.constants.EndPoints;
 import com.hackerkernel.cashking.pojo.DealsListPojo;
 import com.hackerkernel.cashking.pojo.DetailOfferPojo;
+import com.hackerkernel.cashking.pojo.OfferInstallementPojo;
 import com.hackerkernel.cashking.pojo.SimplePojo;
 
 import org.json.JSONArray;
@@ -38,7 +39,6 @@ public class JsonParsor {
             pojo.setImageUrl(obj.getString(Constants.COM_IMG));
             dealList.add(pojo);
         }
-        Log.d("TAG","MUR"+dealList.get(0));
         return dealList;
 
     }
@@ -53,6 +53,18 @@ public class JsonParsor {
             pojo.setShortDescription(obj.getString(Constants.COM_SHORT_DESCRIPTION));
             pojo.setDetailInstruction(obj.getString(Constants.COM_DETAIL_INSTRUCTION));
             pojo.setNote(obj.getString(Constants.COM_NOTE));
+
+            List<OfferInstallementPojo> list = new ArrayList<>();
+            JSONArray installmentArray = obj.getJSONArray(Constants.COM_INSTALLMENT);
+            for (int j = 0; j < installmentArray.length(); j++) {
+                JSONObject jo = installmentArray.getJSONObject(j);
+                OfferInstallementPojo c = new OfferInstallementPojo();
+                c.setDescription(jo.getString(Constants.COM_DESCRIPTION));
+                c.setAmount(jo.getString(Constants.COM_AMOUNT));
+                c.setType(jo.getString(Constants.COM_TYPE));
+                list.add(c);
+            }
+            pojo.setInstallmentList(list);
         }
         return pojo;
     }

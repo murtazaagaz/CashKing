@@ -22,6 +22,7 @@ public class Constants {
             COM_SHORT_DESCRIPTION = "short_description",
             COM_TIME = "time",
             COM_DETAIL_DESCRIPTION ="detail_description",
-            COM_DETAIL_INSTRUCTION = "detail_instruction";
+            COM_DETAIL_INSTRUCTION = "detail_instruction",
+            COM_INSTALLMENT = "installment";
 }
 

@@ -1,5 +1,7 @@
 package com.hackerkernel.cashking.pojo;
 
+import java.util.List;
+
 /**
  * Created by murtaza on 6/18/2016.
  */
@@ -14,6 +16,16 @@ public class DetailOfferPojo {
             link,
             affOfferId,
             affId;
+
+    private List<OfferInstallementPojo> installmentList;
+
+    public List<OfferInstallementPojo> getInstallmentList() {
+        return installmentList;
+    }
+
+    public void setInstallmentList(List<OfferInstallementPojo> installmentList) {
+        this.installmentList = installmentList;
+    }
 
     public String getImageUrl() {
         return imageUrl;
