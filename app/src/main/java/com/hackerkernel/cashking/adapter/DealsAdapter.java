@@ -8,14 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hackerkernel.cashking.R;
 import com.hackerkernel.cashking.activity.DetailOfferActivity;
 import com.hackerkernel.cashking.constants.Constants;
+import com.hackerkernel.cashking.constants.EndPoints;
 import com.hackerkernel.cashking.pojo.DealsListPojo;
-import com.hackerkernel.cashking.pojo.DetailOfferPojo;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.MyViewHolder
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.deaa_layout,parent,false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.deal_list_row,parent,false);
         return new MyViewHolder(itemView);
     }
 
@@ -44,8 +43,17 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.MyViewHolder
         DealsListPojo pojo = mList.get(position);
         holder.dealName.setText(pojo.getDealName());
         holder.dealDesription.setText(pojo.getDealDescription());
-        holder.dealOffer.setText(pojo.getDealOffer());
-        Glide.with(mContext).load(pojo.getImageUrl()).into(holder.dealImage);
+        holder.dealOffer.setText("GET "+mContext.getString(R.string.rupee_sign)+pojo.getDealAmount());
+
+        //download image
+        if (pojo.getImageUrl() != null){
+            String imageUrl = EndPoints.IMAGE_BASE_URL+pojo.getImageUrl();
+            Glide.with(mContext)
+                    .load(imageUrl)
+                    .thumbnail(0.5f)
+                    .into(holder.dealImage);
+        }
+
     }
 
     @Override
@@ -56,13 +64,13 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.MyViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView dealName, dealDesription, dealOffer;
         ImageView dealImage;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             dealName = (TextView) itemView.findViewById(R.id.deal_name);
             dealDesription = (TextView) itemView.findViewById(R.id.deal_desrciption);
             dealOffer = (TextView) itemView.findViewById(R.id.deal_offer);
             dealImage = (ImageView) itemView.findViewById(R.id.deal_image);
-
 
             //set on click on offer
             itemView.setOnClickListener(this);

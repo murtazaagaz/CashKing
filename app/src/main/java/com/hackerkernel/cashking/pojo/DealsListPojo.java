@@ -7,7 +7,7 @@ public class DealsListPojo {
     private String imageUrl;
     private String dealName;
     private String dealDescription;
-    private String DealOffer;
+    private String dealAmount;
 
     public String getId() {
         return id;
@@ -43,11 +43,11 @@ public class DealsListPojo {
         this.dealDescription = dealDescription;
     }
 
-    public String getDealOffer() {
-        return DealOffer;
+    public String getDealAmount() {
+        return dealAmount;
     }
 
-    public void setDealOffer(String dealOffer) {
-        DealOffer = dealOffer;
+    public void setDealAmount(String dealAmount) {
+        this.dealAmount = dealAmount;
     }
 }

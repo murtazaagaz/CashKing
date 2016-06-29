@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#eee"
     android:orientation="vertical"
     android:weightSum="1"
     android:id="@+id/layout_for_snackbar"
@@ -82,6 +81,7 @@
                     android:id="@+id/offer_note"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:layout_below="@+id/offer_detail_description"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/danger" />
@@ -105,18 +105,12 @@
 
                 </TableLayout>
                 <!-- / Installment container -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:id="@+id/divider2"
-                    android:background="@color/divider"
-                    android:layout_below="@+id/offer_installment_container"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/offer_detail_instruction_heading"
-                    android:layout_below="@+id/divider2"
+                    android:layout_below="@+id/offer_installment_container"
                     android:layout_marginTop="10dp"
                     android:text="@string/detail_instruction"
                     style="@style/Base.TextAppearance.AppCompat.Medium"

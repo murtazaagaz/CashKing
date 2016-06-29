@@ -6,4 +6,16 @@
     app:layout_collapseMode="pin"
     android:id="@+id/toolbar"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar_wallet_btn"
+        android:layout_gravity="end"
+        android:textColor="@color/icons"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:background="@android:color/transparent"
+        />
+
+</android.support.v7.widget.Toolbar>

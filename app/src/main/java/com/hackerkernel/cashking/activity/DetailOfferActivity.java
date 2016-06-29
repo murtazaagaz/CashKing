@@ -1,10 +1,10 @@
 package com.hackerkernel.cashking.activity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -21,9 +21,11 @@ import com.bumptech.glide.Glide;
 import com.hackerkernel.cashking.R;
 import com.hackerkernel.cashking.constants.Constants;
 import com.hackerkernel.cashking.constants.EndPoints;
+import com.hackerkernel.cashking.network.FetchWalletAmount;
 import com.hackerkernel.cashking.network.MyVolley;
 import com.hackerkernel.cashking.parser.JsonParsor;
 import com.hackerkernel.cashking.pojo.DetailOfferPojo;
+import com.hackerkernel.cashking.pojo.OfferInstallementPojo;
 import com.hackerkernel.cashking.pojo.SimplePojo;
 import com.hackerkernel.cashking.storage.MySharedPreferences;
 import com.hackerkernel.cashking.util.Util;
@@ -33,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -42,6 +45,7 @@ public class DetailOfferActivity extends AppCompatActivity {
     private RequestQueue mRequestQue;
     private String mOfferId;
     private MySharedPreferences sp;
+    private ProgressDialog pd;
 
     @Bind(R.id.toolbar) Toolbar mToolbar;
     @Bind(R.id.layout_for_snackbar) View mLayoutForSnackbar;
@@ -53,6 +57,7 @@ public class DetailOfferActivity extends AppCompatActivity {
     @Bind(R.id.offer_note) TextView mNote;
     @Bind(R.id.offer_installment_container) TableLayout mInstallmentContainer;
     @Bind(R.id.offer_detail_instruction) TextView mDetailInstruction;
+    @Bind(R.id.divider1) View mDivider1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +71,20 @@ public class DetailOfferActivity extends AppCompatActivity {
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //init progress dialog
+        pd = new ProgressDialog(this);
+        pd.setMessage(getString(R.string.processing));
+        pd.setCancelable(false);
+
         //init sp
         sp = MySharedPreferences.getInstance(this);
 
         //init volley
         mRequestQue = MyVolley.getInstance().getRequestQueue();
+
+        //fetch user wallet amount
+        FetchWalletAmount fetchWalletAmount = new FetchWalletAmount(this);
+        fetchWalletAmount.fetchNewWalletAmountInBackground();
 
         //check offers id
         if (getIntent().hasExtra(Constants.COM_ID)){
@@ -94,18 +108,20 @@ public class DetailOfferActivity extends AppCompatActivity {
     }
 
     private void fetchDataInBackground() {
+        pd.show();
         StringRequest req = new StringRequest(Request.Method.POST, EndPoints.OFFER_DETAIL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                pd.dismiss();
                 try {
-                    SimplePojo pojo = JsonParsor.simpleParser(response);
+                    SimplePojo pojo = JsonParsor.SimpleParser(response);
                     if (pojo.isReturned()){
                         JSONObject obj = new JSONObject(response);
                         JSONArray data = obj.getJSONArray(Constants.COM_DATA);
                         DetailOfferPojo detailOfferPojo = JsonParsor.parseDetailOffer(data);
                         setupViews(detailOfferPojo);
                     }else{
-                        //TODO:: handle when response is false
+                        Util.showRedSnackbar(mLayoutForSnackbar,pojo.getMessage());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -115,6 +131,7 @@ public class DetailOfferActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                pd.dismiss();
                 String handleError = MyVolley.handleVolleyError(error);
                 if (handleError != null){
                     Util.showRedSnackbar(mLayoutForSnackbar,handleError);
@@ -135,7 +152,8 @@ public class DetailOfferActivity extends AppCompatActivity {
 
     private void setupViews(DetailOfferPojo d) {
         mName.setText(d.getName());
-        mAmount.setText(d.getAmount());
+        mAmount.setText("GET "+getString(R.string.rupee_sign)+d.getAmount());
+        mNote.setText(d.getNote());
         mShortDescription.setText(d.getShortDescription());
         mDetailDescription.setText(d.getDetailDescription());
         mDetailInstruction.setText(d.getDetailInstruction().replace("<br>","\n"));
@@ -148,11 +166,34 @@ public class DetailOfferActivity extends AppCompatActivity {
         //setup Image
         if (d.getImageUrl() != null){
             String imageUrl = EndPoints.IMAGE_BASE_URL + d.getImageUrl();
-            Log.d("HUS","HUS: "+imageUrl);
             Glide.with(this)
                     .load(imageUrl)
                     .thumbnail(0.5f)
                     .into(mImage);
+        }
+
+        //setup installment container
+        if (!d.getInstallmentList().isEmpty()){
+            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            List<OfferInstallementPojo> list = d.getInstallmentList();
+            for (int i = 0; i < list.size(); i++) {
+                View view = inflater.inflate(R.layout.include_offer_installment_table_layout,mInstallmentContainer,false);
+                //find view of installment container and set there text
+                TextView installmentDescription = (TextView) view.findViewById(R.id.description);
+                TextView installmentAmount = (TextView) view.findViewById(R.id.amount);
+                //set view
+                OfferInstallementPojo installementPojo = list.get(i);
+                installmentDescription.setText(installementPojo.getDescription());
+                installmentAmount.setText(getString(R.string.rupee_sign)+installementPojo.getAmount());
+                //add the new layout to the container view
+                mInstallmentContainer.addView(view);
+
+                //inflate line
+                View lineView = inflater.inflate(R.layout.empty_line,mInstallmentContainer,false);
+                mInstallmentContainer.addView(lineView);
+            }
+        }else {
+            mDivider1.setVisibility(View.GONE);
         }
     }
 

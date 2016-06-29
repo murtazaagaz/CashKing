@@ -18,4 +18,59 @@
     <string name="try_this_app">Try this app</string>
     <string name="wallet">wallet</string>
     <string name="detail_instruction">Detail instruction</string>
+    <string name="rupee_sign">\u20B9</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="please_be_caregull_wallet">Please be careful while selecting operator Check with your operator for supported amounts before proceeding to recharge</string>
+    <string name="unable_to_get_wallet_amnt">Unable to get wallet amount. Check you internet connection</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="recharge_now">recharge now</string>
+    <string name="hurray">Hurray!</string>
+    <!-- mobile -->
+    <string-array name="mobile_operator_name">
+        <item>Aircel</item>
+        <item>BSNL</item>
+        <item>BSNL - Validity</item>
+        <item>Docomo CDMA</item>
+        <item>Docomo GSM</item>
+        <item>Docomo GSM - Special</item>
+        <item>Idea</item>
+        <item>MTNL Delhi</item>
+        <item>MTNL Delhi Special</item>
+        <item>MTNL Mumbai</item>
+        <item>MTNL Mumbai Special</item>
+        <item>MTS</item>
+        <item>Reliance CDMA</item>
+        <item>Reliance GSM</item>
+        <item>Tata Walky</item>
+        <item>Uninor</item>
+        <item>Uninor - Special</item>
+        <item>Videocon</item>
+        <item>Videocon - Special</item>
+        <item>Vodafone</item>
+    </string-array>
+    <string-array name="mobile_operator_code">
+        <item>1</item>
+        <item>3</item>
+        <item>24</item>
+        <item>18</item>
+        <item>17</item>
+        <item>25</item>
+        <item>8</item>
+        <item>20</item>
+        <item>21</item>
+        <item>6</item>
+        <item>7</item>
+        <item>10</item>
+        <item>12</item>
+        <item>13</item>
+        <item>23</item>
+        <item>19</item>
+        <item>26</item>
+        <item>5</item>
+        <item>27</item>
+        <item>22</item>
+    </string-array>
+    <!-- / mobile -->
 </resources>

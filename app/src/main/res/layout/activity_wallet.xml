@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -24,7 +23,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Heloliosdhufesdkj euhsdxzb xzj"/>
+                android:text="@string/please_be_caregull_wallet"/>
 
             <!-- phone number & amount inputs -->
             <TableLayout
@@ -38,7 +37,7 @@
 
                     <ImageView
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_download_black" />
+                        android:src="@drawable/ic_phone_black" />
 
                     <EditText
                         android:id="@+id/mobileNumber"
@@ -46,6 +45,7 @@
                         android:maxLength="10"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
+                        android:hint="@string/mobile_number"
                         />
                 </TableRow>
 
@@ -53,47 +53,25 @@
 
                     <ImageView
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_download_black" />
+                        android:src="@drawable/ic_wallet_black" />
 
                     <EditText
                         android:id="@+id/amount"
-                        android:inputType="numberDecimal"
+                        android:inputType="number"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp" />
+                        android:layout_marginStart="10dp"
+                        android:hint="@string/enter_amount"/>
                 </TableRow>
 
             </TableLayout>
             <!--  / phone number & amount inputs -->
 
-            <!-- prepaid postpade radio button -->
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:orientation="horizontal"
-                android:id="@+id/radio_button_group">
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:id="@+id/mobile_radio_button"
-                    android:checked="true"
-                    />
-
-
-            </RadioGroup>
-            <!-- / prepaid postpade radio button -->
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
@@ -103,7 +81,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/recharge_now"
-                android:background="@drawable/accent_button"
+                android:text="@string/recharge_now"
+                android:textColor="@color/icons"
+                android:background="@drawable/primary_button_round"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"/>
         </LinearLayout>

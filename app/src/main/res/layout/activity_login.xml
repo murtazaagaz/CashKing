@@ -11,7 +11,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context=".activity.LoginActivity"
         android:padding="30dp">
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/welcome_to_cashking"
-            android:textColor="@color/icons" />
+            android:textColor="@color/icons"/>
 
         <EditText
             android:id="@+id/mobile_EditText"
@@ -34,10 +34,9 @@
             android:layout_height="wrap_content"
             android:hint="@string/enter_mobile_no"
             android:inputType="number"
-            android:textColorHint="@color/icons"
-            android:textColorHighlight="@color/icons"
-            android:textColor="@color/icons"
-            android:maxLength="10" />
+            android:maxLength="10"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/custom_edittext"/>
 
 
         <EditText
@@ -47,9 +46,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/enter_password"
             android:inputType="textPassword"
-            android:textColor="@color/icons"
-            android:textColorHint="@color/icons"
-            android:textColorHighlight="@color/icons" />
+            android:background="@drawable/custom_edittext"/>
 
         <Button
             android:layout_marginTop="20dp"

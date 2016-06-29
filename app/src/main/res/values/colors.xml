@@ -10,4 +10,5 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
     <color name="danger">#F44336</color>
+    <color name="background">#eee</color>
 </resources>

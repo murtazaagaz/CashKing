@@ -1,9 +1,6 @@
 package com.hackerkernel.cashking.parser;
 
-import android.util.Log;
-
 import com.hackerkernel.cashking.constants.Constants;
-import com.hackerkernel.cashking.constants.EndPoints;
 import com.hackerkernel.cashking.pojo.DealsListPojo;
 import com.hackerkernel.cashking.pojo.DetailOfferPojo;
 import com.hackerkernel.cashking.pojo.OfferInstallementPojo;
@@ -18,7 +15,7 @@ import java.util.List;
 
 
 public class JsonParsor {
-    public  static SimplePojo simpleParser(String response) throws JSONException {
+    public  static SimplePojo SimpleParser(String response) throws JSONException {
         JSONObject obj = new JSONObject(response);
         SimplePojo simplePojo = new SimplePojo();
         simplePojo.setMessage(obj.getString(Constants.COM_MESSAGE));
@@ -33,7 +30,7 @@ public class JsonParsor {
             JSONObject obj = data.getJSONObject(i);
             DealsListPojo pojo = new DealsListPojo();
             pojo.setDealName(obj.getString(Constants.COM_NAME));
-            pojo.setDealOffer(obj.getString(Constants.COM_AMOUNT));
+            pojo.setDealAmount(obj.getString(Constants.COM_AMOUNT));
             pojo.setDealDescription(obj.getString(Constants.COM_SHORT_DESCRIPTION));
             pojo.setId(obj.getString(Constants.COM_ID));
             pojo.setImageUrl(obj.getString(Constants.COM_IMG));
