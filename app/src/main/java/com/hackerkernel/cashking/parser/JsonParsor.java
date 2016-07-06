@@ -51,6 +51,10 @@ public class JsonParsor {
             pojo.setDetailInstruction(obj.getString(Constants.COM_DETAIL_INSTRUCTION));
             pojo.setNote(obj.getString(Constants.COM_NOTE));
 
+            pojo.setLink(obj.getString(Constants.COM_LINK));
+            pojo.setAffOfferId(obj.getString(Constants.COM_OFFER_ID));
+            pojo.setAffId(obj.getString(Constants.COM_AFF_ID));
+
             List<OfferInstallementPojo> list = new ArrayList<>();
             JSONArray installmentArray = obj.getJSONArray(Constants.COM_INSTALLMENT);
             for (int j = 0; j < installmentArray.length(); j++) {

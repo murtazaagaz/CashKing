@@ -136,6 +136,6 @@
         android:text="@string/try_this_app"
         android:textColor="#fff"
         android:layout_alignParentBottom="true"
-        android:id="@+id/button" />
+        android:id="@+id/try_this_app" />
 
 </RelativeLayout>

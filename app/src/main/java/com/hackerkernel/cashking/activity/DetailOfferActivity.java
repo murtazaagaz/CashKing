@@ -1,11 +1,14 @@
 package com.hackerkernel.cashking.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -46,6 +49,7 @@ public class DetailOfferActivity extends AppCompatActivity {
     private String mOfferId;
     private MySharedPreferences sp;
     private ProgressDialog pd;
+    private String mAppLink = null;
 
     @Bind(R.id.toolbar) Toolbar mToolbar;
     @Bind(R.id.layout_for_snackbar) View mLayoutForSnackbar;
@@ -58,6 +62,7 @@ public class DetailOfferActivity extends AppCompatActivity {
     @Bind(R.id.offer_installment_container) TableLayout mInstallmentContainer;
     @Bind(R.id.offer_detail_instruction) TextView mDetailInstruction;
     @Bind(R.id.divider1) View mDivider1;
+    @Bind(R.id.try_this_app) Button mTryThisApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +102,26 @@ public class DetailOfferActivity extends AppCompatActivity {
             Toast.makeText(getApplication(),"Unable to open offer detail page. Something weird is going on. Try again later",Toast.LENGTH_LONG).show();
             finish();
         }
+
+        //when user click try this app
+        mTryThisApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAppLink != null){
+
+                    /*
+                    * If offer type is normal
+                    * */
+
+                    String link = EndPoints.R+"?apikey="+Util.generateApiKey(sp.getUserMobile())+"&o="+mOfferId+"&m="+sp.getUserMobile();
+
+                    Intent linkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                    startActivity(linkIntent);
+                }else {
+                    Toast.makeText(getApplicationContext(), R.string.invalid_app_link_wait_for_app_detail_to_load,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void checkInternetAndFetchDetails() {
@@ -157,6 +182,9 @@ public class DetailOfferActivity extends AppCompatActivity {
         mShortDescription.setText(d.getShortDescription());
         mDetailDescription.setText(d.getDetailDescription());
         mDetailInstruction.setText(d.getDetailInstruction().replace("<br>","\n"));
+
+        //app link
+        mAppLink = d.getLink();
 
         //set offer name to title bar
         if (getSupportActionBar() != null){

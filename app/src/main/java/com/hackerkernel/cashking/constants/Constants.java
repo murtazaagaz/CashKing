@@ -26,6 +26,9 @@ public class Constants {
             COM_INSTALLMENT = "installment",
             COM_MOBILE_TO_RECHARGE = "mobile_to_recharge",
             COM_OPERATOR_CODE = "operator_code",
-            COM_RECHARGE_TYPE = "recharge_type";
+            COM_RECHARGE_TYPE = "recharge_type",
+            COM_LINK = "link",
+            COM_OFFER_ID = "offer_id",
+            COM_AFF_ID = "aff_id";
 }
 

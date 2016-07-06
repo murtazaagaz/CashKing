@@ -73,4 +73,5 @@
         <item>22</item>
     </string-array>
     <!-- / mobile -->
+    <string name="invalid_app_link_wait_for_app_detail_to_load">Invalid app link. Wait for app details to load</string>
 </resources>
