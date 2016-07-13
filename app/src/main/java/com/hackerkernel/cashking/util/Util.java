@@ -92,7 +92,7 @@ public class Util {
         return key;
     }
 
-    public static void noInternetSnackBar(final Activity activity, View snackBarLayout){
+    public static void noInternetSnackBar(final Context context, View snackBarLayout){
         final Snackbar snackbar = Snackbar.make(snackBarLayout, R.string.no_internet_connection, Snackbar.LENGTH_INDEFINITE);
         snackbar.setAction(R.string.retry, new View.OnClickListener() {
             @Override
@@ -100,7 +100,7 @@ public class Util {
                snackbar.dismiss();
             }
         });
-        snackbar.setActionTextColor(ContextCompat.getColor(activity,R.color.accent));
+        snackbar.setActionTextColor(ContextCompat.getColor(context,R.color.accent));
         snackbar.show();
     }
 

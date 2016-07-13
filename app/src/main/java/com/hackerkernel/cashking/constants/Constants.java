@@ -29,6 +29,12 @@ public class Constants {
             COM_RECHARGE_TYPE = "recharge_type",
             COM_LINK = "link",
             COM_OFFER_ID = "offer_id",
-            COM_AFF_ID = "aff_id";
+            COM_AFF_ID = "aff_id",
+            COM_AFF_OFFER_ID = "aff_offer_id",
+            COM_NETWORK_ID = "network_id";
+
+    public static final String OFFER_TYPE_COMPLETED = "completed",
+            OFFER_TYPE_NEW = "new",
+            OFFER_TYPE_PENDING = "pending";
 }
 

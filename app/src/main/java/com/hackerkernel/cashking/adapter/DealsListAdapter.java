@@ -3,6 +3,7 @@ package com.hackerkernel.cashking.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,12 @@ import com.hackerkernel.cashking.pojo.DealsListPojo;
 import java.util.List;
 
 
-public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.MyViewHolder> {
+public class DealsListAdapter extends RecyclerView.Adapter<DealsListAdapter.MyViewHolder> {
     private List<DealsListPojo> mList;
     private Context mContext;
+    private String offerType;
 
-    public DealsAdapter(Context context){
+    public DealsListAdapter(Context context,String offerType){
         this.mContext = context;
 
     }
@@ -48,6 +50,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.MyViewHolder
         //download image
         if (pojo.getImageUrl() != null){
             String imageUrl = EndPoints.IMAGE_BASE_URL+pojo.getImageUrl();
+            Log.d("HUS","HUS: "+imageUrl);
             Glide.with(mContext)
                     .load(imageUrl)
                     .thumbnail(0.5f)

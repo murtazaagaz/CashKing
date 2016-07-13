@@ -27,6 +27,8 @@
     <string name="enter_amount">Enter Amount</string>
     <string name="recharge_now">recharge now</string>
     <string name="hurray">Hurray!</string>
+    <string name="no_completed_offers">No completed offers</string>
+    <string name="no_new_offer_found_try_again_later">No new offer found. Try again later</string>
     <!-- mobile -->
     <string-array name="mobile_operator_name">
         <item>Aircel</item>

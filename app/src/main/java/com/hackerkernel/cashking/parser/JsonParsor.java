@@ -24,7 +24,8 @@ public class JsonParsor {
 
 
     }
-    public static List<DealsListPojo> parseDealsList(JSONArray data) throws JSONException {
+
+    public static List<DealsListPojo> parseDealsList(JSONArray data,String type) throws JSONException {
         List<DealsListPojo> dealList = new ArrayList<>();
         for (int i = 0; i <data.length() ; i++) {
             JSONObject obj = data.getJSONObject(i);
@@ -34,6 +35,18 @@ public class JsonParsor {
             pojo.setDealDescription(obj.getString(Constants.COM_SHORT_DESCRIPTION));
             pojo.setId(obj.getString(Constants.COM_ID));
             pojo.setImageUrl(obj.getString(Constants.COM_IMG));
+
+
+            if (type.equals(Constants.OFFER_TYPE_PENDING)){
+                //Parse pending offers
+                pojo.setAffOfferId(obj.getString(Constants.COM_AFF_OFFER_ID));
+                pojo.setNetworkId(obj.getString(Constants.COM_NETWORK_ID));
+            }else if (type.equals(Constants.OFFER_TYPE_COMPLETED)){
+                //Parse Completed offers
+                pojo.setTime(obj.getString(Constants.COM_TIME));
+            }
+
+
             dealList.add(pojo);
         }
         return dealList;

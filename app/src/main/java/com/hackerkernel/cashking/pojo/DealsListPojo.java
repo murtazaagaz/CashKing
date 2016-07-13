@@ -8,6 +8,17 @@ public class DealsListPojo {
     private String dealName;
     private String dealDescription;
     private String dealAmount;
+    private String affOfferId;
+    private String networkId;
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getId() {
         return id;
@@ -49,5 +60,21 @@ public class DealsListPojo {
 
     public void setDealAmount(String dealAmount) {
         this.dealAmount = dealAmount;
+    }
+
+    public String getAffOfferId() {
+        return affOfferId;
+    }
+
+    public void setAffOfferId(String affOfferId) {
+        this.affOfferId = affOfferId;
+    }
+
+    public String getNetworkId() {
+        return networkId;
+    }
+
+    public void setNetworkId(String networkId) {
+        this.networkId = networkId;
     }
 }
